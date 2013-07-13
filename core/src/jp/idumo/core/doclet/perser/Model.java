@@ -12,6 +12,9 @@ import jp.idumo.core.doclet.json.StringArrayValue;
 
 import com.sun.javadoc.ClassDoc;
 
+/**
+ * @author Yusei SHIGENOBU
+ */
 public class Model implements IAnnotation {
 
 	private static final String TAG            = "contains";
