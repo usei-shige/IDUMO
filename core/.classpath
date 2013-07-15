@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/jdom.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.6.0_43/lib/tools.jar"/>
+	<classpathentry kind="lib" path="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
