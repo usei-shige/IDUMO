@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import jp.idumo.core.doclet.JSONBuilder;
 import jp.idumo.core.doclet.perser.Model;
 
+import com.sun.javadoc.AnnotationDesc;
 import com.sun.javadoc.ClassDoc;
 import com.sun.javadoc.RootDoc;
 
@@ -20,10 +21,11 @@ import com.sun.javadoc.RootDoc;
 public class CreateModelFile {
 	private static final String ENCODING = "UTF-8";
 	private static final String MODEL_JSON_NAME = "model.json";
+	private static final String I_MODEL = "IDUMOModel";
 	
 	public static boolean start(RootDoc root) throws IOException {
 		
-		File idumomodel = new File(System.getProperty("user.die") + "/" + MODEL_JSON_NAME);
+		File idumomodel = new File(System.getProperty("user.dir") + "/" + MODEL_JSON_NAME);
 		System.out.println(idumomodel.getPath());
 		PrintWriter pwModel   = new PrintWriter(new OutputStreamWriter(new FileOutputStream(idumomodel), ENCODING));
 		StringBuilder builder = new StringBuilder();
@@ -31,11 +33,14 @@ public class CreateModelFile {
 		ClassDoc[] classes = root.classes();
 		for (ClassDoc classDoc : classes) {
 			String classname = classDoc.toString();
-			Model mdl = new Model(classDoc);
-			if (mdl.isContainDataElement()) {
-				JSONBuilder json = new JSONBuilder();
-				json.add(mdl);
-				builder.append(String.format("  \"%s\":%s, \n", classname, json));
+			AnnotationDesc[] annotations = classDoc.annotations();
+			JSONBuilder json = new JSONBuilder();
+			
+			for (AnnotationDesc annotation : annotations) {
+				String typename = annotation.annotationType().name();
+				if(typename.equals(I_MODEL)) {
+					json.add(new Model(classname, annotation));
+				}
 			}
 		}
 		builder.setLength(builder.length() -2);
