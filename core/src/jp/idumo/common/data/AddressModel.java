@@ -1,20 +1,22 @@
 package jp.idumo.common.data;
 
+import jp.idumo.core.annotation.IDUMOModel;
 import jp.idumo.core.data.DataElement.AbstractData;
 import jp.idumo.core.data.raw.StringRawDataType;
 
+@IDUMOModel(model = { "zipnumber", "prefecture", "city", "town" })
 public class AddressModel  extends AbstractData {
 	//prefecture
 	public static final String ZIP = "zipnumber";
 	public static final String PREFECTURE = "prefecture";
 	public static final String CITY = "city";
-	public static final String TWON = "twon";
+	public static final String TOWN = "town";
 	
 	public AddressModel(String zip, String ken, String shi, String cho) {
 		add(new StringRawDataType(ZIP, zip, "ZipNumber"));
 		add(new StringRawDataType(PREFECTURE, ken, "Prefecture"));
 		add(new StringRawDataType(CITY, shi, "City"));
-		add(new StringRawDataType(TWON, cho, "Twon"));
+		add(new StringRawDataType(TOWN, cho, "Town"));
 	}
 	
 	public String getZipNumber() {
@@ -30,7 +32,7 @@ public class AddressModel  extends AbstractData {
 	}
 	
 	public String getTwon() {
-		return(String) getValue(TWON);
+		return(String) getValue(TOWN);
 	}
 	
 	@Override
@@ -48,7 +50,7 @@ public class AddressModel  extends AbstractData {
 		sb.append(":");
 		sb.append(getCity());
 		sb.append("\n");
-		sb.append(TWON);
+		sb.append(TOWN);
 		sb.append(":");
 		sb.append(getTwon());
 		sb.append("\n");

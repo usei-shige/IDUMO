@@ -19,10 +19,12 @@ package jp.idumo.common.data;
 
 import jp.idumo.common.data.element.LatLngElement;
 import jp.idumo.common.data.element.TextElement;
+import jp.idumo.core.annotation.IDUMOModel;
 import jp.idumo.core.data.DataElement.AbstractData;
 import jp.idumo.core.data.raw.NumberRawDataType;
 import jp.idumo.core.data.raw.StringRawDataType;
 
+@IDUMOModel(model = { "name", "kana", "lat", "lng", "address", "catchcopy", "budget", "average" })
 public class HotpepperData extends AbstractData implements LatLngElement, TextElement {
 	private static final String NAME = "name";
 	private static final String KANA = "kana";
