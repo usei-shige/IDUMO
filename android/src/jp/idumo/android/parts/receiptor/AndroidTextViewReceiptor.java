@@ -20,7 +20,6 @@ package jp.idumo.android.parts.receiptor;
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidActivityResource;
-import jp.idumo.common.data.element.TextElement;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOReceiptor;
 import jp.idumo.core.data.DataElement;
@@ -43,7 +42,7 @@ import android.widget.TextView;
  * 
  */
 @IDUMOAndroid
-@IDUMOReceiptor(receive = TextElement.class)
+@IDUMOReceiptor(receive = DataElement.class)
 @IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "テキストの表示", summary = "Androidのテキスト表示")
 public class AndroidTextViewReceiptor implements Receivable, Executable, AndroidActivityController {
 	
@@ -58,7 +57,7 @@ public class AndroidTextViewReceiptor implements Receivable, Executable, Android
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ArrayConnectDataType(TextElement.class);
+		return new ArrayConnectDataType(DataElement.class);
 	}
 	
 	@Override
@@ -67,8 +66,7 @@ public class AndroidTextViewReceiptor implements Receivable, Executable, Android
 		FlowingData idf = sender.onCall();
 		StringBuilder sb = new StringBuilder();
 		for (DataElement d : idf) {
-			TextElement t = (TextElement)d;
-			sb.append(t.getText());
+			sb.append(d.getText());
 		}
 		
 		LogManager.debug(sb.toString());
