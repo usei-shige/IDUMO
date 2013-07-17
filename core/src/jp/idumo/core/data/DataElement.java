@@ -10,6 +10,8 @@ import jp.idumo.core.data.raw.RawDataType;
 public interface DataElement {
 
 	RawDataType get(String name);
+	
+	String getText();
 
 	public abstract class AbstractData implements DataElement, TextElement {
 		private Map<String, RawDataType> raw = new TreeMap<String, RawDataType>();
