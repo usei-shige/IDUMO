@@ -1,9 +1,11 @@
 package jp.idumo.android.data;
 
+import jp.idumo.core.annotation.IDUMOModel;
 import jp.idumo.core.data.DataElement.AbstractData;
 import jp.idumo.core.data.raw.NumberRawDataType;
 import jp.idumo.core.data.raw.StringRawDataType;
 
+@IDUMOModel(model = { "status", "plug", "level", "scale", "temperature" })
 public class AndroidBatteryModel extends AbstractData {
 	public static final String STATUS      = "status";
 	public static final String PLUG        = "plug";

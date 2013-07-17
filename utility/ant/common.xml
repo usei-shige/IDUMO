@@ -36,6 +36,7 @@
 	<property name="doclet"         value="jp.idumo.core.doclet.CreatePartsFile"/>
 	<property name="doclet.android" value="jp.idumo.core.doclet.CreateAndroidSettingFile"/>
 	<property name="doclet.datastructure" value="jp.idumo.core.doclet.CreateDataStructureFile"/>
+	<property name="doclet.model" value="jp.idumo.core.doclet.CreateModelFile"/>
 	  
 	<path id="icore.libpath">
 		<pathelement location="${java.tools}"/>
@@ -176,6 +177,22 @@
 		<echo message="${lib}"/>
 		<echo message="${src}"/>
 		<echo message="create datastructure.json"/>
+	</target>
+	
+	<target name="model" depends="compile">
+	    <javadoc access="public"
+	        encoding="UTF-8"
+	        additionalparam="-bootclasspath ${android.lib}:${java.tools}"
+	        packagenames="${package}"
+	        sourcepathref="javadoc.src"
+	        classpathref="javadoc.libs"
+	        >
+	        <doclet name="${doclet.model}" pathref="javadoc.bin"/>
+	    </javadoc>
+	    <echo message="${bin}"/>
+	    <echo message="${lib}"/>
+	    <echo message="${src}"/>
+	    <echo message="create model.json"/>
 	</target>
 	
 

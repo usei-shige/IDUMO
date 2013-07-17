@@ -17,6 +17,7 @@
  */
 package jp.idumo.common.data;
 
+import jp.idumo.core.annotation.IDUMOModel;
 import jp.idumo.core.data.DataElement.AbstractData;
 import jp.idumo.core.data.raw.NumberRawDataType;
 import jp.idumo.core.data.raw.StringRawDataType;
@@ -26,6 +27,7 @@ import jp.idumo.core.data.raw.StringRawDataType;
  * @version 2.0
  * 
  */
+@IDUMOModel(model = { "location", "date", "max_temp", "min_temp", "weather", "description" })
 public class LivedoorWeatherData extends AbstractData {
 	public static final String LOCATION = "location";
 	public static final String DATE = "date";
