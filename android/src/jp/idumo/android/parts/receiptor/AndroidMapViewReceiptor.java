@@ -20,8 +20,6 @@ package jp.idumo.android.parts.receiptor;
 import java.util.ArrayList;
 import java.util.List;
 
-import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
-
 import jp.idumo.android.R;
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.core.AndroidActivityController;
@@ -112,7 +110,8 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 		view.setBuiltInZoomControls(true);
 		view.setSatellite(false);
 		
-		Drawable marker = activity.getApplicationContext().getResources().getDrawable(R.drawable.androidmarker);
+//		Drawable marker = activity.getApplicationContext().getResources().getDrawable(R.drawable.androidmarker);
+		Drawable marker = activity.getActivity().getResources().getDrawable(R.drawable.androidmarker);
 		overlay = new PinItemizedOverlay(marker);
 		view.getOverlays().add(overlay);
 	}
@@ -125,7 +124,7 @@ class PinItemizedOverlay extends ItemizedOverlay<PinOverlayItem> {
 	private List<GeoPoint> points = new ArrayList<GeoPoint>();
 	
 	public PinItemizedOverlay(Drawable defaultMarker) {
-		super( boundCenterBottom(defaultMarker) );
+		super(boundCenterBottom(defaultMarker));
 	}
 	
 	@Override
