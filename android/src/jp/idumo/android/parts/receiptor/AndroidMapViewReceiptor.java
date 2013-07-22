@@ -17,6 +17,12 @@
  */
 package jp.idumo.android.parts.receiptor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
+
+import jp.idumo.android.R;
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidActivityResource;
@@ -35,10 +41,13 @@ import jp.idumo.core.parts.Sendable;
 import jp.idumo.core.util.LogManager;
 import jp.idumo.core.validator.ReceiveValidatorSize;
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.OverlayItem;
 
 /**
  * Android上にテキスト情報を出力するReceiptorです
@@ -57,8 +66,9 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 	private Activity				activity;
 	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
 	
-//	private static final int		ZOOM_LEVEL	= 15;
+	private static final int		ZOOM_LEVEL	= 17;
 	private MapController			controller;
+	private PinItemizedOverlay      overlay;
 	
 	private static final String		API_KEY		= "0A1Cx9Pq6v1LrPccIpXJpStEaqtgxeo-1qC6zJw";
 	
@@ -79,6 +89,7 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 		LatLngElement llde = (LatLngElement) idf.next();
 		GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
 		LogManager.debug(point);
+		overlay.addPoint(point);
 		controller.setCenter(point);
 		view.invalidate();
 	}
@@ -95,12 +106,52 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 		activity.getActivity().setContentView(view);
 		
 		controller = view.getController();
-//		controller.setZoom(ZOOM_LEVEL);
-		controller.setZoom(15);
+		controller.setZoom(ZOOM_LEVEL);
 		
 		view.setClickable(true);
 		view.setBuiltInZoomControls(true);
 		view.setSatellite(false);
+		
+		Drawable marker = activity.getApplicationContext().getResources().getDrawable(R.drawable.androidmarker);
+		overlay = new PinItemizedOverlay(marker);
+		view.getOverlays().add(overlay);
 	}
 	
+}
+
+
+//ピンの実装を試みる
+class PinItemizedOverlay extends ItemizedOverlay<PinOverlayItem> {
+	private List<GeoPoint> points = new ArrayList<GeoPoint>();
+	
+	public PinItemizedOverlay(Drawable defaultMarker) {
+		super( boundCenterBottom(defaultMarker) );
+	}
+	
+	@Override
+	protected PinOverlayItem createItem(int i) {
+		GeoPoint point = points.get(i);
+		return new PinOverlayItem(point);
+	}
+	
+	@Override
+	public int size() {
+		return points.size();
+	}
+	
+	public void addPoint(GeoPoint point) {
+		this.points.add(point);
+		populate();
+	}
+	
+	public void clearPoint() {
+		this.points.clear();
+		populate();
+	}
+}
+
+class PinOverlayItem extends OverlayItem {
+	public PinOverlayItem(GeoPoint point) {
+		super(point, "", "");
+	}
 }

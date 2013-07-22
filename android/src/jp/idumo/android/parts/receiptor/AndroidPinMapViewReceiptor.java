@@ -59,7 +59,7 @@ public class AndroidPinMapViewReceiptor implements Receivable, Executable,Androi
 	private Sendable				sender;
 	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
 	
-	private static final int		ZOOM_LEVEL	= 10;
+	private static final int		ZOOM_LEVEL	= 17;
 	private MapController			controller;
 	private DefaultItemizedOverlay	overlay;
 	
