@@ -57,7 +57,7 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 	private Activity				activity;
 	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
 	
-	private static final int		ZOOM_LEVEL	= 3;
+	private static final int		ZOOM_LEVEL	= 15;
 	private MapController			controller;
 	
 	private static final String		API_KEY		= "0A1Cx9Pq6v1LrPccIpXJpStEaqtgxeo-1qC6zJw";
