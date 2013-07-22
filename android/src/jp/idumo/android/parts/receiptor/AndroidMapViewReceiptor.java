@@ -66,7 +66,7 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 	
 	private static final int		ZOOM_LEVEL	= 17;
 	private MapController			controller;
-	private PinItemizedOverlay      overlay;
+//	private PinItemizedOverlay      overlay;
 	
 	private static final String		API_KEY		= "0A1Cx9Pq6v1LrPccIpXJpStEaqtgxeo-1qC6zJw";
 	
@@ -87,7 +87,7 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 		LatLngElement llde = (LatLngElement) idf.next();
 		GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
 		LogManager.debug(point);
-		overlay.addPoint(point);
+//		overlay.addPoint(point);
 		controller.setCenter(point);
 		view.invalidate();
 	}
@@ -110,10 +110,9 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 		view.setBuiltInZoomControls(true);
 		view.setSatellite(false);
 		
-//		Drawable marker = activity.getApplicationContext().getResources().getDrawable(R.drawable.androidmarker);
-		Drawable marker = activity.getActivity().getResources().getDrawable(R.drawable.androidmarker);
-		overlay = new PinItemizedOverlay(marker);
-		view.getOverlays().add(overlay);
+//		Drawable marker = activity.getActivity().getResources().getDrawable(R.drawable.androidmarker);
+//		overlay = new PinItemizedOverlay(marker);
+//		view.getOverlays().add(overlay);
 	}
 	
 }
